@@ -3,6 +3,7 @@
 * by Zzbaivong <http://devs.forumvi.com/>
 */
 (function ($) {
+	"use strict";
 	$.GoogleURLShortener = function (options) {
 		var settings = $.extend({
 			key: null,
@@ -44,20 +45,20 @@
 							}
 						}                      
 						switch (mode) {
-                            case "longUrl":
-                                request = client.urlshortener.url.insert({
-                                    "resource": {
-                                        "longUrl": url
-                                    }
-                                });
-                                link = "id";
-                                break;
-                            case "shortUrl":
-                                request = client.urlshortener.url.get({
-                                    "shortUrl": url
-                                });
-                                link = "longUrl";
-                                break;
+			                        	case "longUrl":
+			                                	request = client.urlshortener.url.insert({
+			                                    		"resource": {
+			                                        		"longUrl": url
+			                                    		}
+			                                	});
+			                                	link = "id";
+			                        		break;
+			                            	case "shortUrl":
+			                                	request = client.urlshortener.url.get({
+			                                    		"shortUrl": url
+			                                	});
+			                                	link = "longUrl";
+			                                	break;
 						}                      
 						if (request) {                          
 							request.execute(function (response) {
