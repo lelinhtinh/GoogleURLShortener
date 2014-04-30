@@ -26,7 +26,7 @@
 			});
 		};      
 		var url = settings.url;      
-		if ("" !== url && /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(url) && !/^http:\/\/goo\.gl\/?$/.test(url)) {
+		if ("" !== url && /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/.test(url) && !/^http:\/\/goo\.gl\/?$/.test(url)) {
 			window.gapi_onload = function (options) {              
 				var client = gapi.client;
 				client.setApiKey(settings.key);
@@ -39,13 +39,13 @@
 							link;                      
 						if (mode == "auto") {                          
 							if (/http:\/\/goo\.gl\/.+/.test(url)) {                              
-								mode = "shortUrl";                              
+								mode = "short";                              
 							} else {                              
-								mode = "longUrl";                              
+								mode = "long";                              
 							}
 						}                      
 						switch (mode) {
-			                        	case "longUrl":
+			                        	case "long":
 			                                	request = client.urlshortener.url.insert({
 			                                    		"resource": {
 			                                        		"longUrl": url
@@ -53,7 +53,7 @@
 			                                	});
 			                                	link = "id";
 			                        		break;
-			                            	case "shortUrl":
+			                            	case "short":
 			                                	request = client.urlshortener.url.get({
 			                                    		"shortUrl": url
 			                                	});
